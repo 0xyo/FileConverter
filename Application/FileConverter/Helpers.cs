@@ -231,13 +231,14 @@ namespace FileConverter
             }
         }
 
-        public static Thread InstantiateThread(string name, ThreadStart threadStart)
+        public static Thread InstantiateThread(string name, ThreadStart threadStart, ApartmentState apartmentState = ApartmentState.MTA)
         {
             ISettingsService settingsService = Ioc.Default.GetRequiredService<ISettingsService>();
             CultureInfo currentCulture = settingsService?.Settings?.ApplicationLanguage;
 
             Thread thread = new Thread(threadStart);
             thread.Name = name;
+            thread.SetApartmentState(apartmentState);
 
             if (currentCulture != null)
             {
@@ -248,13 +249,14 @@ namespace FileConverter
             return thread;
         }
 
-        public static Thread InstantiateThread(string name, ParameterizedThreadStart parameterizedThreadStart)
+        public static Thread InstantiateThread(string name, ParameterizedThreadStart parameterizedThreadStart, ApartmentState apartmentState = ApartmentState.MTA)
         {
             ISettingsService settingsService = Ioc.Default.GetRequiredService<ISettingsService>();
             CultureInfo currentCulture = settingsService?.Settings?.ApplicationLanguage;
 
             Thread thread = new Thread(parameterizedThreadStart);
             thread.Name = name;
+            thread.SetApartmentState(apartmentState);
 
             if (currentCulture != null)
             {

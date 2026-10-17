@@ -468,6 +468,11 @@ namespace FileConverter.ConversionJobs
             this.ErrorMessage = exitingMessage;
         }
 
+        public void Fail(string errorMessage)
+        {
+            this.ConversionFailed(errorMessage);
+        }
+
         protected void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
         {
             if (this.PropertyChanged != null)
