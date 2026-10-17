@@ -96,7 +96,8 @@ namespace FileConverter.ConversionJobs
             this.UserState = Properties.Resources.ConversionStateConversion;
 
             Debug.Log("Convert PowerPoint document to pdf.");
-            this.document.ExportAsFixedFormat(this.intermediateFilePath, PowerPoint.Enums.PpFixedFormatType.ppFixedFormatTypePDF);
+            // ExportAsFixedFormat is broken in NetOffice 1.7.4 (DISP_E_TYPEMISMATCH due to wrong argument marshalling); SaveAs PDF is the reliable equivalent.
+            this.document.SaveAs(this.intermediateFilePath, PowerPoint.Enums.PpSaveAsFileType.ppSaveAsPDF);
 
             Debug.Log($"Close PowerPoint document '{this.InputFilePath}'.");
             this.document.Close();

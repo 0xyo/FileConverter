@@ -118,6 +118,26 @@
                 <File Id="System.Threading.Tasks.Extensions.dll" Source="$(var.FileConverter.TargetDir)System.Threading.Tasks.Extensions.dll" KeyPath="yes" Checksum="yes" />
             </Component>
 
+            <!-- NetOffice (Office interop) -->
+            <Component Guid="{a5b8f4f3-07a7-4686-93f1-a88bfbf02941}">
+                <File Id="NetOffice.dll" Source="$(var.FileConverter.TargetDir)NetOffice.dll" KeyPath="yes" Checksum="yes" />
+            </Component>
+            <Component Guid="{86b45b3b-071c-4702-8ba5-e5a6f5aa37a9}">
+                <File Id="OfficeApi.dll" Source="$(var.FileConverter.TargetDir)OfficeApi.dll" KeyPath="yes" Checksum="yes" />
+            </Component>
+            <Component Guid="{0fe234a4-8552-4ec3-bd7b-f6b273ba7bdb}">
+                <File Id="WordApi.dll" Source="$(var.FileConverter.TargetDir)WordApi.dll" KeyPath="yes" Checksum="yes" />
+            </Component>
+            <Component Guid="{378d12cc-d63c-4a6e-89cd-a0ae227b3cf6}">
+                <File Id="ExcelApi.dll" Source="$(var.FileConverter.TargetDir)ExcelApi.dll" KeyPath="yes" Checksum="yes" />
+            </Component>
+            <Component Guid="{c41d66c7-a8dd-4e85-87fc-c7626ba6c63a}">
+                <File Id="PowerPointApi.dll" Source="$(var.FileConverter.TargetDir)PowerPointApi.dll" KeyPath="yes" Checksum="yes" />
+            </Component>
+            <Component Guid="{b2660d43-8cfb-4d64-891e-13a43706df96}">
+                <File Id="VBIDEApi.dll" Source="$(var.FileConverter.TargetDir)VBIDEApi.dll" KeyPath="yes" Checksum="yes" />
+            </Component>
+
             <Component Guid="{24efefd7-f7ef-4f4c-95d8-e6d136581a86}">
               <File Id="Magick.Native.dll" Source="$(var.FileConverter.TargetDir)Magick.Native-Q16-x64.dll" KeyPath="yes" Checksum="yes" />
             </Component>

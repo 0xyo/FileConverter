@@ -58,7 +58,7 @@ namespace FileConverter.Services
 
         public void ConvertFilesAsync()
         {
-            Thread fileConvertionThread = Helpers.InstantiateThread("ConversionQueueThread", this.ConvertFiles);
+            Thread fileConvertionThread = Helpers.InstantiateThread("ConversionQueueThread", this.ConvertFiles, ApartmentState.STA);
             fileConvertionThread.Start();
         }
 
@@ -67,7 +67,15 @@ namespace FileConverter.Services
             // Prepare conversions.
             for (int index = 0; index < this.ConversionJobs.Count; index++)
             {
-                this.ConversionJobs[index].PrepareConversion();
+                try
+                {
+                    this.ConversionJobs[index].PrepareConversion();
+                }
+                catch (Exception exception)
+                {
+                    Debug.Log(exception.ToString());
+                    this.ConversionJobs[index].Fail(exception.Message);
+                }
             }
 
             System.Collections.Specialized.StringCollection files = new System.Collections.Specialized.StringCollection();
@@ -107,7 +115,7 @@ namespace FileConverter.Services
                             Thread thread = jobThreads[threadIndex];
                             if (thread == null || !thread.IsAlive)
                             {
-                                jobThread = Helpers.InstantiateThread(conversionJob.GetType().Name, this.ExecuteConversionJob);
+                                jobThread = Helpers.InstantiateThread(conversionJob.GetType().Name, this.ExecuteConversionJob, ApartmentState.STA);
                                 jobThreads[threadIndex] = jobThread;
                                 break;
                             }
@@ -177,6 +185,7 @@ namespace FileConverter.Services
             catch (Exception exception)
             {
                 Debug.LogError($"Failure during conversion: {exception}");
+                conversionJob.Fail(exception.Message);
             }
         }
 
